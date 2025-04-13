@@ -38,5 +38,5 @@ struct CardSmallView: View {
 }
 
 #Preview {
-    CardSmallView(card: Card(title: "Card 1", text: "Texto de card 1", type: .small))
+    CardSmallView(card: Card(title: "Card 1", text: "Texto de card 1"))
 }

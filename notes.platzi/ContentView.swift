@@ -10,20 +10,15 @@ import SwiftUI
 struct ContentView: View {
     
     let cards: [Card] = [
-        Card(title: "Card 1", text: "Small", type: .small),
-        Card(title: "Card 2", text: "Medium", type: .medium)
+        Card(title: "Card 1", text: "Texto card 1"),
+        Card(title: "Card 2", text: "Texto card 2")
     ]
     
     var body: some View {
         VStack {
             List {
                 ForEach(cards) { card in
-                    switch card.type {
-                        case .small:
-                            CardSmallView(card: card)
-                        case .medium:
-                            CardMediumView(card: card)
-                    }
+                    CardSmallView(card: card)
                 }
             }
             .listStyle(.plain)
