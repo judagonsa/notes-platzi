@@ -8,29 +8,35 @@
 import SwiftUI
 
 struct CardSmallView: View {
+    
+    var card: Card
+    
     var body: some View {
         HStack {
-            Text("Hello word!")
+            Text(card.title)
                 .font(.headline)
                 .lineLimit(2)
                 .frame(width: 120)
                 .padding(8)
                 .background(.cyan.opacity(0.2))
                 .cornerRadius(10)
-            Text("Este es un ejemplo de un card small")
+            
+            Text(card.text)
                 .font(.subheadline)
                 .lineLimit(2)
                 .multilineTextAlignment(.leading)
-                .frame(width: .infinity)
+                .frame(maxWidth: .infinity)
+            
             Image(systemName: "heart")
                 .foregroundColor(.red)
         }
         .padding()
         .background(.gray.opacity(0.2))
         .cornerRadius(10)
+        .listRowSeparator(.hidden)
     }
 }
 
 #Preview {
-    CardSmallView()
+    CardSmallView(card: Card(title: "Card 1", text: "Texto de card 1", type: .small))
 }

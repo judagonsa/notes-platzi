@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CardMediumView: View {
+    var card: Card
     var body: some View {
         VStack {
             HStack {
@@ -16,7 +17,7 @@ struct CardMediumView: View {
                     .foregroundColor(.red)
             }
             
-            Text("Hello word!")
+            Text(card.title)
                 .font(.headline)
                 .lineLimit(2)
                 .frame(width: 120)
@@ -24,19 +25,20 @@ struct CardMediumView: View {
                 .background(.cyan.opacity(0.2))
                 .cornerRadius(10)
             
-            Text("Este es un ejemplo de un card small")
+            Text(card.text)
                 .font(.subheadline)
                 .lineLimit(2)
                 .multilineTextAlignment(.leading)
-                .frame(width: .infinity)
+                .frame(maxWidth: .infinity)
         }
         .frame(height: 150)
         .padding()
         .background(.gray.opacity(0.2))
         .cornerRadius(10)
+        .listRowSeparator(.hidden)
     }
 }
 
 #Preview {
-    CardMediumView()
+    CardMediumView(card: Card(title: "Card 1", text: "Medium", type: .medium))
 }
