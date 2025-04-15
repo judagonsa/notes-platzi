@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct notes_platziApp: App {
+    @StateObject var appInfo = AppInfo()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(appInfo)
         }
     }
 }

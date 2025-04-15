@@ -9,17 +9,15 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @EnvironmentObject var appInfo: AppInfo
+    
     @State var showAddNote = false
     
-    let notes: [Note] = [
-        Note(title: "Note 1", text: "Texto note 1", type: .small, isFavorite: false),
-        Note(title: "Note 2", text: "Texto note 2", type: .medium, isFavorite: true)
-    ]
     
     var body: some View {
         VStack {
             List {
-                ForEach(notes) { note in
+                ForEach(appInfo.notes) { note in
                     NoteView(note: note)
                 }
             }
@@ -42,7 +40,7 @@ struct ContentView: View {
         }
         .sheet(isPresented: $showAddNote) {
             CreateNoteView() { note in
-                print(note)
+                appInfo.createNote(note: note)
                 showAddNote = false
             }
         }
@@ -51,4 +49,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+        .environmentObject(AppInfo())
 }
