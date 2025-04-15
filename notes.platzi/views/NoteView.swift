@@ -10,6 +10,7 @@ import SwiftUI
 struct NoteView: View {
     
     var note: Note
+    var onTagFavorite: (() -> Void)?
     
     @ViewBuilder
     var NoteSmallView : some View {
@@ -30,6 +31,9 @@ struct NoteView: View {
             
             Image(systemName: note.isFavorite ? "heart.fill" : "heart")
                 .foregroundColor(.red)
+                .onTapGesture {
+                    onTagFavorite?()
+                }
         }
         .padding()
         .background(.gray.opacity(0.2))
@@ -43,6 +47,9 @@ struct NoteView: View {
                 Spacer()
                 Image(systemName: note.isFavorite ? "heart.fill" : "heart")
                     .foregroundColor(.red)
+                    .onTapGesture {
+                        onTagFavorite?()
+                    }
             }
             
             Text(note.title)

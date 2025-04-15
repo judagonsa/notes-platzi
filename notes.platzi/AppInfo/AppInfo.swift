@@ -24,4 +24,16 @@ class AppInfo: ObservableObject {
     func createNote(note: Note) {
         notes.append(note)
     }
+    
+    func addFavorite(note: Note) {
+        if let index = notes.firstIndex(of: note) {
+            notes[index].isFavorite.toggle()
+        }
+    }
+    
+    func updateNote(note: Note) {
+        if let index = notes.firstIndex(of: note) {
+            notes[index] = note
+        }
+    }
 }

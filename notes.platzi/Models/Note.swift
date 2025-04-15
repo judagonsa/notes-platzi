@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct Note: Identifiable {
+struct Note: Identifiable, Equatable {
     let id: UUID = UUID()
-    let title: String
-    let text: String
-    let type: NoteType
-    let isFavorite: Bool
+    var title: String
+    var text: String
+    var type: NoteType
+    var isFavorite: Bool
 }
 
 enum NoteType {

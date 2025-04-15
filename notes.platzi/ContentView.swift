@@ -13,12 +13,13 @@ struct ContentView: View {
     
     @State var showAddNote = false
     
-    
     var body: some View {
         VStack {
             List {
                 ForEach(appInfo.notes) { note in
-                    NoteView(note: note)
+                    NoteView(note: note) {
+                        appInfo.addFavorite(note: note)
+                    }
                 }
             }
             .listStyle(.plain)
