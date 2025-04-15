@@ -1,5 +1,5 @@
 //
-//  CardSmallView.swift
+//  NoteSmallView.swift
 //  notes.platzi
 //
 //  Created by Julian González on 13/04/25.
@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct CardView: View {
+struct NoteView: View {
     
-    var card: Card
+    var note: Note
     
     @ViewBuilder
-    var CardSmallView : some View {
+    var NoteSmallView : some View {
         HStack {
-            Text(card.title)
+            Text(note.title)
                 .font(.headline)
                 .lineLimit(2)
                 .frame(width: 120)
@@ -22,13 +22,13 @@ struct CardView: View {
                 .background(.cyan.opacity(0.2))
                 .cornerRadius(10)
             
-            Text(card.text)
+            Text(note.text)
                 .font(.subheadline)
                 .lineLimit(2)
                 .multilineTextAlignment(.leading)
                 .frame(maxWidth: .infinity)
             
-            Image(systemName: card.isFavorite ? "heart.fill" : "heart")
+            Image(systemName: note.isFavorite ? "heart.fill" : "heart")
                 .foregroundColor(.red)
         }
         .padding()
@@ -37,15 +37,15 @@ struct CardView: View {
     }
     
     @ViewBuilder
-    var CardMediumView : some View {
+    var NoteMediumView : some View {
         VStack {
             HStack {
                 Spacer()
-                Image(systemName: card.isFavorite ? "heart.fill" : "heart")
+                Image(systemName: note.isFavorite ? "heart.fill" : "heart")
                     .foregroundColor(.red)
             }
             
-            Text(card.title)
+            Text(note.title)
                 .font(.headline)
                 .lineLimit(2)
                 .frame(width: 120)
@@ -53,7 +53,7 @@ struct CardView: View {
                 .background(.cyan.opacity(0.2))
                 .cornerRadius(10)
             
-            Text(card.text)
+            Text(note.text)
                 .font(.subheadline)
                 .lineLimit(2)
                 .multilineTextAlignment(.leading)
@@ -67,11 +67,11 @@ struct CardView: View {
     
     var body: some View {
         VStack {
-            switch card.type {
+            switch note.type {
                 case .small:
-                    CardSmallView
+                    NoteSmallView
                 case .medium:
-                    CardMediumView
+                    NoteMediumView
             }
         }
         .listRowSeparator(.hidden)
@@ -80,9 +80,9 @@ struct CardView: View {
 }
 
 #Preview {
-    CardView(card: Card(
-                    title: "Card 1",
-                    text: "Texto de card 1",
+    NoteView(note: Note(
+                    title: "Note 1",
+                    text: "Texto de note 1",
                     type: .small,
                     isFavorite: true
                 ))

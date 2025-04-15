@@ -1,5 +1,5 @@
 //
-//  Card.swift
+//  Note.swift
 //  notes.platzi
 //
 //  Created by Julian González on 13/04/25.
@@ -7,15 +7,15 @@
 
 import Foundation
 
-struct Card: Identifiable {
+struct Note: Identifiable {
     let id: UUID = UUID()
     let title: String
     let text: String
-    let type: CardType
+    let type: NoteType
     let isFavorite: Bool
 }
 
-enum CardType {
+enum NoteType {
     case small
     case medium
 }

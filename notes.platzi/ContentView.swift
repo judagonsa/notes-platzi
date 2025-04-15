@@ -11,16 +11,16 @@ struct ContentView: View {
     
     @State var showAddNote = false
     
-    let cards: [Card] = [
-        Card(title: "Card 1", text: "Texto card 1", type: .small, isFavorite: false),
-        Card(title: "Card 2", text: "Texto card 2", type: .medium, isFavorite: true)
+    let notes: [Note] = [
+        Note(title: "Note 1", text: "Texto note 1", type: .small, isFavorite: false),
+        Note(title: "Note 2", text: "Texto note 2", type: .medium, isFavorite: true)
     ]
     
     var body: some View {
         VStack {
             List {
-                ForEach(cards) { card in
-                    CardView(card: card)
+                ForEach(notes) { note in
+                    NoteView(note: note)
                 }
             }
             .listStyle(.plain)
@@ -41,8 +41,8 @@ struct ContentView: View {
             }
         }
         .sheet(isPresented: $showAddNote) {
-            CreateNoteView() { card in
-                print(card)
+            CreateNoteView() { note in
+                print(note)
                 showAddNote = false
             }
         }

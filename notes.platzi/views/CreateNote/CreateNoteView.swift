@@ -8,22 +8,14 @@
 import SwiftUI
 
 struct CreateNoteView: View {
-    @State var title: String = ""
-    @State var text: String = ""
-    @State var cardType: CardType = .small
-    @State var isFavorite: Bool = false
+    @ObservedObject var viewModel: CreateNoteViewModel = CreateNoteViewModel()
     
-    var onCreateNote: ((Card) -> Void)?
+    var onCreateNote: ((Note) -> Void)?
     
     func saveNote() {
-        let card = Card(
-            title: title,
-            text: text,
-            type: cardType,
-            isFavorite: isFavorite
-        )
+        let note = viewModel.createNote()
         
-        onCreateNote?(card)
+        onCreateNote?(note)
     }
     
     var body: some View {
@@ -34,13 +26,13 @@ struct CreateNoteView: View {
                     .bold()
                     .padding(.top, 10)
                 
-                TextField("Título", text: $title)
+                TextField("Título", text: $viewModel.title)
                     .font(.headline)
                     .padding()
                     .background(.gray.opacity(0.2))
                     .cornerRadius(10)
                 
-                TextEditor(text: $text)
+                TextEditor(text: $viewModel.text)
                     .scrollContentBackground(.hidden)
                     .font(.body)
                     .frame(height: 150)
@@ -50,15 +42,15 @@ struct CreateNoteView: View {
                 HStack {
                     Text("Selecciona el tipo de nota")
                     Spacer()
-                    Picker("Tipo de nota", selection: $cardType) {
-                        Text("Pequeño").tag(CardType.small)
-                        Text("Mediana").tag(CardType.medium)
+                    Picker("Tipo de nota", selection: $viewModel.noteType) {
+                        Text("Pequeño").tag(NoteType.small)
+                        Text("Mediana").tag(NoteType.medium)
                     }
                     .accentColor(.red)
                     
                 }
                 
-                Toggle(isOn: $isFavorite) {
+                Toggle(isOn: $viewModel.isFavorite) {
                     Text("Marcar como favorito")
                 }
                 
