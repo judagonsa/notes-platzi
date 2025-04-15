@@ -12,6 +12,7 @@ struct Card: Identifiable {
     let title: String
     let text: String
     let type: CardType
+    let isFavorite: Bool
 }
 
 enum CardType {

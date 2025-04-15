@@ -28,7 +28,7 @@ struct CardView: View {
                 .multilineTextAlignment(.leading)
                 .frame(maxWidth: .infinity)
             
-            Image(systemName: "heart")
+            Image(systemName: card.isFavorite ? "heart.fill" : "heart")
                 .foregroundColor(.red)
         }
         .padding()
@@ -41,7 +41,7 @@ struct CardView: View {
         VStack {
             HStack {
                 Spacer()
-                Image(systemName: "heart")
+                Image(systemName: card.isFavorite ? "heart.fill" : "heart")
                     .foregroundColor(.red)
             }
             
@@ -80,5 +80,10 @@ struct CardView: View {
 }
 
 #Preview {
-    CardView(card: Card(title: "Card 1", text: "Texto de card 1", type: .small))
+    CardView(card: Card(
+                    title: "Card 1",
+                    text: "Texto de card 1",
+                    type: .small,
+                    isFavorite: true
+                ))
 }

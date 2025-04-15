@@ -9,9 +9,11 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @State var showAddNote = false
+    
     let cards: [Card] = [
-        Card(title: "Card 1", text: "Texto card 1", type: .small),
-        Card(title: "Card 2", text: "Texto card 2", type: .medium)
+        Card(title: "Card 1", text: "Texto card 1", type: .small, isFavorite: false),
+        Card(title: "Card 2", text: "Texto card 2", type: .medium, isFavorite: true)
     ]
     
     var body: some View {
@@ -22,6 +24,27 @@ struct ContentView: View {
                 }
             }
             .listStyle(.plain)
+            .overlay {
+                VStack {
+                    Spacer()
+                    Button {
+                        showAddNote = true
+                    } label: {
+                        Text("Crear nota")
+                            .font(.headline)
+                            .foregroundStyle(.white)
+                            .padding()
+                            .background(.red)
+                            .cornerRadius(10)
+                    }
+                }
+            }
+        }
+        .sheet(isPresented: $showAddNote) {
+            CreateNoteView() { card in
+                print(card)
+                showAddNote = false
+            }
         }
     }
 }
