@@ -8,6 +8,7 @@
 import Foundation
 
 class AppInfo: ObservableObject {
+    
     @Published var notes: [Note] = [
         Note(title: "Compra semanal", text: "Leche, huevos, pan y fruta.", type: .medium, isFavorite: true),
         Note(title: "Reunión de proyecto", text: "Reunión semanal el lunes a las 10 AM.", type: .small, isFavorite: false),
@@ -35,5 +36,13 @@ class AppInfo: ObservableObject {
         if let index = notes.firstIndex(of: oldNote) {
             notes[index] = newNote
         }
+    }
+    
+    func saveNotes() -> Bool {
+        return  HelperUserDefault.saveNotes(notes: notes)
+    }
+    
+    func getNotes() -> [Note]? {
+        return HelperUserDefault.getNotes()
     }
 }

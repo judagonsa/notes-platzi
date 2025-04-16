@@ -7,15 +7,15 @@
 
 import Foundation
 
-struct Note: Identifiable, Equatable {
-    let id: UUID = UUID()
+struct Note: Identifiable, Equatable, Encodable, Decodable {
+    var id: UUID = UUID()
     var title: String
     var text: String
     var type: NoteType
     var isFavorite: Bool
 }
 
-enum NoteType {
+enum NoteType: Encodable, Decodable {
     case small
     case medium
 }
