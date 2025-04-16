@@ -10,9 +10,12 @@ import SwiftUI
 struct CreateNoteView: View {
     @ObservedObject var viewModel: CreateNoteViewModel = CreateNoteViewModel()
     
+    @State var note: Note?
+    
     var onCreateNote: ((Note) -> Void)?
     
     func saveNote() {
+        //validar campos y mostrar error
         let note = viewModel.createNote()
         
         onCreateNote?(note)
@@ -69,6 +72,16 @@ struct CreateNoteView: View {
 
             }
             .padding(.horizontal, 20)
+        }
+        .onAppear {
+            if let noteEdit = note {
+                viewModel.title = noteEdit.title
+                viewModel.text = noteEdit.text
+                viewModel.noteType = noteEdit.type
+                viewModel.isFavorite = noteEdit.isFavorite
+                print("noteEdit: \(noteEdit)")
+                print(viewModel)
+            }
         }
     }
 }

@@ -12,14 +12,17 @@ struct ContentView: View {
     @EnvironmentObject var appInfo: AppInfo
     
     @State var showAddNote = false
+    @State var selectedNote: Note?
     
     var body: some View {
         VStack {
-            List {
-                ForEach(appInfo.notes) { note in
-                    NoteView(note: note) {
-                        appInfo.addFavorite(note: note)
-                    }
+            List (appInfo.notes) { note in
+                NoteView(note: note) {
+                    appInfo.addFavorite(note: note)
+                }
+                .onTapGesture {
+                    selectedNote = note
+                    showAddNote = true
                 }
             }
             .listStyle(.plain)
@@ -38,10 +41,17 @@ struct ContentView: View {
                     }
                 }
             }
+            
         }
         .sheet(isPresented: $showAddNote) {
-            CreateNoteView() { note in
-                appInfo.createNote(note: note)
+            CreateNoteView(note: selectedNote ?? nil) { note in
+                if selectedNote != nil {
+                    appInfo.updateNote(oldNote: selectedNote!, newNote: note)
+                    selectedNote = nil
+                } else {
+                    appInfo.createNote(note: note)
+                }
+                
                 showAddNote = false
             }
         }

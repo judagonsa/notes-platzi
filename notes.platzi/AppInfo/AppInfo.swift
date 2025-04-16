@@ -31,9 +31,9 @@ class AppInfo: ObservableObject {
         }
     }
     
-    func updateNote(note: Note) {
-        if let index = notes.firstIndex(of: note) {
-            notes[index] = note
+    func updateNote(oldNote: Note, newNote: Note) {
+        if let index = notes.firstIndex(of: oldNote) {
+            notes[index] = newNote
         }
     }
 }
