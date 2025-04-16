@@ -14,6 +14,8 @@ struct ContentView: View {
     @State var showAddNote = false
     @State var selectedNote: Note?
     
+    @State private var showAlert = false
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -60,11 +62,17 @@ struct ContentView: View {
             .toolbar {
                 Button{
                     if appInfo.saveNotes() {
-                        print("notas guardadas")
+                        showAlert = true
                     }
                 } label: {
                     Image(systemName: "bookmark.fill")
                 }
+            }
+            .alert(isPresented: $showAlert) {
+                Alert(
+                    title: Text("Guardado"),
+                    message: Text("Tus notas fueron guardadas con exito.")
+                )
             }
         }
         .onAppear {
